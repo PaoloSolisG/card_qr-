@@ -1,0 +1,15 @@
+# Used when the web root points at the project folder instead of /public
+# (e.g. a Hostinger subdomain). Every request is served from public/,
+# so .env, app/, vendor/ and storage/ are never reachable directly.
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+# Extra safety: never serve dotfiles such as .env or .git.
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+Options -Indexes
