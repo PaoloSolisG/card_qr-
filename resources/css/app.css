@@ -6,4 +6,83 @@
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-display: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+
+    /* PS Group palette, sampled from the logo. */
+    --color-brand-50: #eef5ff;
+    --color-brand-100: #d9e8ff;
+    --color-brand-500: #1d6ff2;
+    --color-brand-600: #1459d6;
+    --color-brand-700: #1146ad;
+    --color-brand-cyan: #34d5cf;
+    --color-brand-lime: #cbea4b;
+    --color-navy: #061a4d;
+    --color-navy-deep: #031033;
+}
+
+/* Public card: pill buttons and round social icons from the mockup. */
+@layer components {
+    .card-pill {
+        @apply grid h-[clamp(3.5rem,16vw,4rem)] w-full grid-cols-[clamp(3.6rem,18vw,4.75rem)_1px_1fr] items-center rounded-full border border-white/30 text-white transition active:scale-[0.98];
+        background-image: linear-gradient(90deg, #22d9cf 0%, #18a4ef 45%, #1b63f5 100%);
+        box-shadow:
+            0 0 22px rgb(56 189 248 / 0.45),
+            inset 0 1px 0 rgb(255 255 255 / 0.35);
+    }
+
+    .card-pill:hover {
+        box-shadow:
+            0 0 30px rgb(56 189 248 / 0.7),
+            inset 0 1px 0 rgb(255 255 255 / 0.35);
+    }
+
+    .card-social {
+        @apply grid size-[clamp(2.25rem,11.2vw,3rem)] shrink-0 place-items-center rounded-full border-2 border-brand-cyan bg-navy/70 text-white transition active:scale-95;
+        box-shadow:
+            0 0 14px rgb(52 213 207 / 0.55),
+            inset 0 0 10px rgb(52 213 207 / 0.25);
+    }
+
+    .card-input {
+        @apply w-full rounded-2xl border border-white/20 bg-white/10 px-4 py-3.5 text-base text-white placeholder-white/50 outline-none transition focus:border-brand-cyan focus:bg-white/15 focus:ring-2 focus:ring-brand-cyan/40;
+    }
+}
+
+/* Admin form controls. */
+@layer components {
+    .admin-input {
+        @apply block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 shadow-xs placeholder-slate-400 outline-none transition focus:border-brand-500 focus:ring-3 focus:ring-brand-500/15;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-danger {
+        @apply inline-flex items-center justify-center gap-2 rounded-lg px-3.5 py-2 text-sm font-medium transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 disabled:opacity-50;
+    }
+
+    .btn-primary {
+        @apply bg-brand-500 text-white shadow-xs hover:bg-brand-600;
+    }
+
+    .btn-secondary {
+        @apply border border-slate-300 bg-white text-slate-700 shadow-xs hover:bg-slate-50;
+    }
+
+    .btn-danger {
+        @apply text-red-600 hover:bg-red-50;
+    }
+
+    .btn-icon {
+        @apply inline-grid size-8 place-items-center rounded-md text-slate-500 transition hover:bg-slate-100 hover:text-slate-900;
+    }
+}
+
+@keyframes toast-in-out {
+    0% { opacity: 0; transform: translate(-50%, -12px); }
+    8%, 85% { opacity: 1; transform: translate(-50%, 0); }
+    100% { opacity: 0; transform: translate(-50%, -12px); }
+}
+
+.toast {
+    animation: toast-in-out 4.5s ease forwards;
 }

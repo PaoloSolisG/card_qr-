@@ -2,24 +2,33 @@
 
 namespace Database\Seeders;
 
+use App\Models\Agent;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
     /**
-     * Seed the application's database.
+     * Seed the admin user and a demo agent.
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        User::query()->firstOrCreate(
+            ['email' => env('ADMIN_EMAIL', 'admin@psgroup.com')],
+            ['name' => 'Administrador', 'password' => env('ADMIN_PASSWORD', 'password')],
+        );
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        Agent::query()->firstOrCreate(
+            ['slug' => 'cristina-godoy-inciso'],
+            [
+                'name' => 'Cristina Godoy Inciso',
+                'position' => 'Controller',
+                'phone' => '+51 999 999 999',
+                'whatsapp' => '51999999999',
+                'email' => 'cristina@psgroup.com',
+                'website' => 'https://psgroup.com',
+                'is_active' => true,
+            ],
+        );
     }
 }
